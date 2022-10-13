@@ -10,11 +10,15 @@ namespace P1_CustomList {
             test.ShowList();
             test.ShowLength();
 
+            Console.WriteLine("//////////////");
             test.AddRange(new string []{ "on", "ona", "ono"});
             test.ShowList();
             test.ShowLength();
 
-
+            Console.WriteLine("//////////////");
+            test.Insert("Pitor", 2);
+            test.ShowList();
+            test.ShowLength();
 
             // not working
             //CustomList<int> test2 = new CustomList<int>() { 1, 2, 3, 4, 5 };

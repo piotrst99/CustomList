@@ -30,8 +30,19 @@ namespace P1_CustomList{
         }
 
         public void Insert(T item, int index) {
-            //https://www.geeksforgeeks.org/c-sharp-how-to-insert-an-element-in-an-array/
-
+            T[] result = new T[_items.Length + 1];
+            for (int i = 0; i < result.Length; i++) {
+                if (i < index) {
+                    result[i] = _items[i];
+                }
+                else if(i == index) {
+                    result[i] = item;
+                }
+                else {
+                    result[i] = _items[i-1];
+                }
+            }
+            _items = result;
         }
 
         public void ShowList() {
