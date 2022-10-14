@@ -5,11 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace P1_CustomList{
-    public class CustomList<T>{
+    public class CustomList<T> {
         private T[] _items = null;
 
+        public int Count {
+            get {
+                return _items.Length;
+            }
+        }
+
+        public T this[int index] { 
+            get{
+                return _items[index];
+            } 
+            set{
+                _items[index] = value;
+            } 
+        }
+
         public CustomList() {
-            _items = new T[0];
+            _items = new T[] { };
         }
 
         public CustomList(T[] items) {
@@ -17,6 +32,32 @@ namespace P1_CustomList{
             foreach (T item in items) {
                 _items.Append(item);
             }
+        }
+
+        public static bool operator ==(CustomList<T> t1, CustomList<T> t2) {
+            if (t1.Count == t2.Count) {
+                for (int i = 0; i < t1.Count; i++) {
+                    if (t1[i].Equals(t2[i]))
+                        continue;
+                    else
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public static bool operator !=(CustomList<T> t1, CustomList<T> t2) {
+            if (t1.Count != t2.Count) {
+                for (int i = 0; i < t1.Count; i++) {
+                    if (t1[i].Equals(t2[i]))
+                        continue;
+                    else
+                        return false;
+                }
+                return true;
+            }
+            return false;
         }
 
         public void Add(T item) {
@@ -39,24 +80,68 @@ namespace P1_CustomList{
                     result[i] = item;
                 }
                 else {
-                    result[i] = _items[i-1];
+                    result[i] = _items[i - 1];
                 }
             }
             _items = result;
         }
 
-        public void ShowList() {
-            if(_items.Length == 0) {
-                Console.WriteLine("pusto");
-                return;
+        public void Clear() {
+            _items = new T[] { };
+        }
+
+        public void RemoveElement(T item) {
+            bool isRemoved = false;
+            T[] result = new T[_items.Length - 1];
+            for (int i = 0; i < _items.Length; i++) {
+                if (_items[i].Equals(item) && !isRemoved) {
+                    isRemoved = true;
+                }
+                else {
+                    if (isRemoved) {
+                        result[i - 1] = _items[i];
+                    }
+                    else {
+                        result[i] = _items[i];
+                    }
+                }
             }
-            foreach (T item in _items) {
-                Console.WriteLine(item.ToString());
+            _items = result;
+        }
+
+        public void RemoveAt(int index) {
+            bool isRemoved = false;
+            T[] result = new T[_items.Length - 1];
+            for (int i = 0; i < _items.Length; i++) {
+                if (i == index && !isRemoved) {
+                    isRemoved = true;
+                }
+                else {
+                    if (isRemoved) {
+                        result[i - 1] = _items[i];
+                    }
+                    else {
+                        result[i] = _items[i];
+                    }
+                }
+            }
+            _items = result;
+        }
+
+        public void Reverse() {
+            for (int i = 0; i < _items.Length / 2; i++) {
+                T tmp = _items[i];
+                _items[i] = _items[_items.Length - i - 1];
+                _items[_items.Length - i - 1] = tmp;
             }
         }
 
-        public void ShowLength() {
-            Console.WriteLine(_items.Length);
+        public bool Contains(T item) {
+            foreach (T i in _items) {
+                if (i.Equals(item))
+                    return true;
+            }
+            return false;
         }
 
         private void resizeArray(T item) {
