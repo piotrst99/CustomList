@@ -27,13 +27,6 @@ namespace P1_CustomList{
             _items = new T[] { };
         }
 
-        public CustomList(T[] items) {
-            _items = new T[] { };
-            foreach (T item in items) {
-                _items.Append(item);
-            }
-        }
-
         public static bool operator ==(CustomList<T> t1, CustomList<T> t2) {
             if (t1.Count == t2.Count) {
                 for (int i = 0; i < t1.Count; i++) {
@@ -60,6 +53,7 @@ namespace P1_CustomList{
             return false;
         }
 
+        // Add (T? item)
         public void Add(T item) {
             resizeArray(item);
         }
@@ -91,6 +85,7 @@ namespace P1_CustomList{
         }
 
         public void RemoveElement(T item) {
+            if (!Contains(item)) return;
             bool isRemoved = false;
             T[] result = new T[_items.Length - 1];
             for (int i = 0; i < _items.Length; i++) {
@@ -142,6 +137,15 @@ namespace P1_CustomList{
                     return true;
             }
             return false;
+        }
+
+        // IndexOf (T? item)
+        public int IndexOf(T item) {
+            for (int i = 0; i < _items.Length; i++) {
+                if (_items[i].Equals(item))
+                    return i;
+            }
+            return -1;
         }
 
         private void resizeArray(T item) {
