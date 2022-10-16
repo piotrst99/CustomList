@@ -53,8 +53,33 @@ namespace P1_CustomList{
             return false;
         }
 
-        // Add (T? item)
-        public void Add(T item) {
+        public static bool operator ==(CustomList<T> t1, T[] t2) {
+            if (t1.Count == t2.Length) {
+                for (int i = 0; i < t1.Count; i++) {
+                    if (t1[i].Equals(t2[i]))
+                        continue;
+                    else
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public static bool operator !=(CustomList<T> t1, T[] t2) {
+            if (t1.Count != t2.Length) {
+                for (int i = 0; i < t1.Count; i++) {
+                    if (t1[i].Equals(t2[i]))
+                        continue;
+                    else
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public void Add(T? item) {
             resizeArray(item);
         }
 
@@ -105,6 +130,7 @@ namespace P1_CustomList{
         }
 
         public void RemoveAt(int index) {
+            if (index < 0 || index >= _items.Length || _items.Length == 0) return;
             bool isRemoved = false;
             T[] result = new T[_items.Length - 1];
             for (int i = 0; i < _items.Length; i++) {
@@ -139,8 +165,7 @@ namespace P1_CustomList{
             return false;
         }
 
-        // IndexOf (T? item)
-        public int IndexOf(T item) {
+        public int IndexOf(T? item) {
             for (int i = 0; i < _items.Length; i++) {
                 if (_items[i].Equals(item))
                     return i;

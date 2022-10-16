@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 namespace UnitTest.TestCase {
     
     public interface ITester_Remove {
-        void Compare_Remove_IsCorrect();
-        void Compare_Remove_IsNotCorrect();
+        /*void Compare_Remove_IsCorrect();
+        void Compare_Remove_IsNotCorrect();*/
         void GetCount_Remove_IsCorrect();
         void GetCount_Remove_IsNotCorrect();
+        void GetCount_RemoveAt_IsCorrect();
+        void GetCount_RemoveAt_IsNotCorrect();
     }
 
     public class Tester_Remove<T> : ITester_Remove {
@@ -28,13 +30,13 @@ namespace UnitTest.TestCase {
             _customList = new CustomList<T>();
         }
 
-        public void Compare_Remove_IsCorrect() {
+        /*public void Compare_Remove_IsCorrect() {
             throw new NotImplementedException();
         }
 
         public void Compare_Remove_IsNotCorrect() {
             throw new NotImplementedException();
-        }
+        }*/
 
         public void GetCount_Remove_IsCorrect() {
             _customList.RemoveElement(Data);
@@ -46,6 +48,18 @@ namespace UnitTest.TestCase {
             if (_customList.Count != 0) Assert.AreNotEqual(_customList.Count, 0);
             Assert.AreNotEqual(_customList.Count, _customList.Count + 1);
             Assert.AreNotEqual(_customList.Count, _customList.Count - 1);
+        }
+
+        public void GetCount_RemoveAt_IsCorrect() {
+            _customList.RemoveAt(Position);
+            Assert.AreEqual(_customList.Count, ExpectionCountOfElement);
+        }
+
+        public void GetCount_RemoveAt_IsNotCorrect() {
+            _customList.RemoveAt(Position);
+            if (_customList.Count != 0) Assert.AreNotEqual(_customList.Count, 0);
+            Assert.AreNotEqual(_customList.Count, ExpectionCountOfElement + 1);
+            Assert.AreNotEqual(_customList.Count, ExpectionCountOfElement - 1);
         }
     }
 }

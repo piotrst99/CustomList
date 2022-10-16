@@ -14,24 +14,114 @@ namespace UnitTest {
     [TestFixture]
     public class CustomListTest {
 
+        [Test]
+        [TestCaseSource("AddOneElement")]
+        public void GetCount_AddItem_IsCorrect(ITester_AddItem tester) {
+            tester.GetCount_AddItem_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("AddOneElement")]
+        public void GetCount_AddItem_IsNotCorrect(ITester_AddItem tester) {
+            tester.GetCount_AddItem_IsNotCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("AddMoreElement")]
+        public void GetCount_AddItems_IsCorrect(ITester_AddItems tester) {
+            tester.GetCount_AddItems_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("AddMoreElement")]
+        public void GetCount_AddItems_IsNotCorrect(ITester_AddItems tester) {
+            tester.GetCount_AddItems_IsNotCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("InsertElement")]
+        public void Compare_Insert_IsCorrect(ITester_Insert tester) {
+            tester.Compare_Insert_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("InsertElement2")]
+        public void Compare_Insert_IsNotCorrect(ITester_Insert tester) {
+            tester.Compare_Insert_IsNotCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("ClearArray")]
+        public void GetCount_Clear_IsCorrect(ITester_Clear tester) {
+            tester.GetCount_Clear_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("ClearArray")]
+        public void GetCount_Clear_IsNotCorrect(ITester_Clear tester) {
+            tester.GetCount_Clear_IsNotCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("RemoveItem")]
+        public void GetCount_Remove_IsCorrect(ITester_Remove tester) {
+            tester.GetCount_Remove_IsCorrect();
+        }
+        
+        [Test]
+        [TestCaseSource("RemoveNullItem")]
+        public void GetCount_RemoveNullItem_IsCorrect(ITester_Remove tester) {
+            tester.GetCount_Remove_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("RemoveItem2")]
+        public void GetCount_Remove_IsNotCorrect(ITester_Remove tester) {
+            tester.GetCount_Remove_IsNotCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("RemoveItemFromIndex")]
+        public void GetCount_RemoveAt_IsCorrect(ITester_Remove tester) {
+            tester.GetCount_RemoveAt_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("RemoveItemFromIndex")]
+        public void GetCount_RemoveAt_IsNotCorrect(ITester_Remove tester) {
+            tester.GetCount_RemoveAt_IsNotCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("Reverse")]
+        public void Compare_Reverse_IsCorrect(ITester_Reverse tester) {
+            tester.Compare_Reverse_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("Reverse2")]
+        public void Compare_Reverse_IsNotCorrect(ITester_Reverse tester) {
+            tester.Compare_Reverse_IsNotCorrect();
+        }
+
         public static IEnumerable<ITester_AddItem> AddOneElement() {
             yield return new Tester_AddItem<string>() {
-                Items = new string[]{ },  
+                Items = new string[] { },
                 Data = "Piotr",
                 ExpectedResult = 1
             };
             yield return new Tester_AddItem<int>() {
-                Items = new int[] {0, 44, 21, 3, 4 },
+                Items = new int[] { 0, 44, 21, 3, 4 },
                 Data = 10,
                 ExpectedResult = 6
             };
-            yield return new Tester_AddItem<bool>() { 
-                Items = new bool[] {true, false, false},
+            yield return new Tester_AddItem<bool>() {
+                Items = new bool[] { true, false, false },
                 Data = false,
                 ExpectedResult = 4
             };
-            yield return new Tester_AddItem<float>() { 
-                Items = new float[] {4.44F, .69F, 10F, 999.99F},
+            yield return new Tester_AddItem<float>() {
+                Items = new float[] { 4.44F, .69F, 10F, 999.99F },
                 Data = 100.55F,
                 ExpectedResult = 5
             };
@@ -45,7 +135,7 @@ namespace UnitTest {
         public static IEnumerable<ITester_AddItems> AddMoreElement() {
             yield return new Tester_AddItems<string>() {
                 Items = new string[] { },
-                Datas = new string[] { "Piotr", "Karolina", "Maria", "Rafał"},
+                Datas = new string[] { "Piotr", "Karolina", "Maria", "Rafał" },
                 ExpectedResult = 4
             };
             yield return new Tester_AddItems<int>() {
@@ -60,7 +150,7 @@ namespace UnitTest {
             };
             yield return new Tester_AddItems<float>() {
                 Items = new float[] { 4.44F, .69F, 10F, 999.99F },
-                Datas = new float[] { .0001F, 1000.01F},
+                Datas = new float[] { .0001F, 1000.01F },
                 ExpectedResult = 6
             };
             yield return new Tester_AddItems<Point>() {
@@ -225,70 +315,78 @@ namespace UnitTest {
             };
         }
 
-        [Test]
-        [TestCaseSource("AddOneElement")]
-        public void GetCount_AddItem_IsCorrect(ITester_AddItem tester) {
-            tester.GetCount_AddItem_IsCorrect();
+        public static IEnumerable<ITester_Remove> RemoveItemFromIndex() {
+            yield return new Tester_Remove<string>() {
+                Items = new string[] { },
+                Position = 0,
+                ExpectionCountOfElement = 0
+            };
+            yield return new Tester_Remove<int>() {
+                Items = new int[] { 0, 44, 21, 3, 4 },
+                Position = 5,
+                ExpectionCountOfElement = 5
+            };
+            yield return new Tester_Remove<bool?>() {
+                Items = new bool?[] { true, false, false },
+                Position = 1,
+                ExpectionCountOfElement = 2
+            };
+            yield return new Tester_Remove<float?>() {
+                Items = new float?[] { 4.44F, .69F, 10F, 999.99F },
+                Position = 1,
+                ExpectionCountOfElement = 3
+            };
+            yield return new Tester_Remove<Point>() {
+                Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } },
+                Position = 2,
+                ExpectionCountOfElement = 2
+            };
         }
 
-        [Test]
-        [TestCaseSource("AddOneElement")]
-        public void GetCount_AddItem_IsNotCorrect(ITester_AddItem tester) {
-            tester.GetCount_AddItem_IsNotCorrect();
+        public static IEnumerable<ITester_Reverse> Reverse() {
+            yield return new Tester_Reverse<string>() {
+                Items = new string[] { "Piotr" },
+                ExpectionResult = new string[] { "Piotr" }
+            };
+            yield return new Tester_Reverse<int>() {
+                Items = new int[] { 0, 44, 21, 3, 4 },
+                ExpectionResult = new int[] { 4, 3, 21, 44, 0 }
+            };
+            yield return new Tester_Reverse<bool?>() {
+                Items = new bool?[] { true, false, false },
+                ExpectionResult = new bool?[] { false, false, true }
+            };
+            yield return new Tester_Reverse<float?>() {
+                Items = new float?[] { 4.44F, .69F, 10F, 999.99F },
+                ExpectionResult = new float?[] { 999.99F, 10F, .69F, 4.44F }
+            };
+            yield return new Tester_Reverse<Point>() {
+                Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } },
+                ExpectionResult = new Point[]{ new Point { X = 2, Y = 5 }, new Point { X = -1, Y = 1 }, new Point { X = 0, Y = 0 } }
+            };
         }
 
-        [Test]
-        [TestCaseSource("AddMoreElement")]
-        public void GetCount_AddItems_IsCorrect(ITester_AddItems tester) {
-            tester.GetCount_AddItems_IsCorrect();
-        }
-
-        [Test]
-        [TestCaseSource("AddMoreElement")]
-        public void GetCount_AddItems_IsNotCorrect(ITester_AddItems tester) {
-            tester.GetCount_AddItems_IsNotCorrect();
-        }
-
-        [Test]
-        [TestCaseSource("InsertElement")]
-        public void Compare_Insert_IsCorrect(ITester_Insert tester) {
-            tester.Compare_Insert_IsCorrect();
-        }
-
-        [Test]
-        [TestCaseSource("InsertElement2")]
-        public void Compare_Insert_IsNotCorrect(ITester_Insert tester) {
-            tester.Compare_Insert_IsNotCorrect();
-        }
-
-        [Test]
-        [TestCaseSource("ClearArray")]
-        public void GetCount_Clear_IsCorrect(ITester_Clear tester) {
-            tester.GetCount_Clear_IsCorrect();
-        }
-
-        [Test]
-        [TestCaseSource("ClearArray")]
-        public void GetCount_Clear_IsNotCorrect(ITester_Clear tester) {
-            tester.GetCount_Clear_IsNotCorrect();
-        }
-
-        [Test]
-        [TestCaseSource("RemoveItem")]
-        public void GetCount_Remove_IsCorrect(ITester_Remove tester) {
-            tester.GetCount_Remove_IsCorrect();
-        }
-        
-        [Test]
-        [TestCaseSource("RemoveNullItem")]
-        public void GetCount_RemoveNullItem_IsCorrect(ITester_Remove tester) {
-            tester.GetCount_Remove_IsCorrect();
-        }
-
-        [Test]
-        [TestCaseSource("RemoveItem2")]
-        public void GetCount_Remove_IsNotCorrect(ITester_Remove tester) {
-            tester.GetCount_Remove_IsNotCorrect();
+        public static IEnumerable<ITester_Reverse> Reverse2() {
+            yield return new Tester_Reverse<string>() {
+                Items = new string[] { "Piotr" },
+                ExpectionResult = new string[] { }
+            };
+            yield return new Tester_Reverse<int>() {
+                Items = new int[] { 0, 44, 21, 3, 4 },
+                ExpectionResult = new int[] { 0, 44, 21, 3, 4 }
+            };
+            yield return new Tester_Reverse<bool?>() {
+                Items = new bool?[] { true, false, false },
+                ExpectionResult = new bool?[] { true, false, false }
+            };
+            yield return new Tester_Reverse<float?>() {
+                Items = new float?[] { 4.44F, .69F, 10F, 999.99F },
+                ExpectionResult = new float?[] { 4.44F, .69F, 10F, 999.99F }
+            };
+            yield return new Tester_Reverse<Point>() {
+                Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } },
+                ExpectionResult = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } }
+            };
         }
     }
 }
