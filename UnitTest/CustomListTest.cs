@@ -27,6 +27,18 @@ namespace UnitTest {
         }
 
         [Test]
+        [TestCaseSource("AddOneElement2")]
+        public void Compare_AddItem_IsCorrect(ITester_AddItem tester) {
+            tester.Compare_AddItem_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("AddOneElement3")]
+        public void Compare_AddItem_IsNotCorrect(ITester_AddItem tester) {
+            tester.Compare_AddItem_IsNotCorrect();
+        }
+
+        [Test]
         [TestCaseSource("AddMoreElement")]
         public void GetCount_AddItems_IsCorrect(ITester_AddItems tester) {
             tester.GetCount_AddItems_IsCorrect();
@@ -153,6 +165,57 @@ namespace UnitTest {
                 Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } },
                 Data = new Point { X = -10, Y = 100 },
                 ExpectedResult = 4
+            };
+        }
+
+        public static IEnumerable<ITester_AddItem> AddOneElement2() {
+            yield return new Tester_AddItem<string>() {
+                Items = new string[] { },
+                Data = "Piotr",
+            };
+            yield return new Tester_AddItem<int>() {
+                Items = new int[] { 0, 44, 21, 3, 4 },
+                Data = 10,
+            };
+            yield return new Tester_AddItem<bool>() {
+                Items = new bool[] { true, false, false },
+                Data = false,
+            };
+            yield return new Tester_AddItem<float>() {
+                Items = new float[] { 4.44F, .69F, 10F, 999.99F },
+                Data = 100.55F,
+            };
+            yield return new Tester_AddItem<Point>() {
+                Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } },
+                Data = new Point { X = -10, Y = 100 },
+            };
+        }
+
+        public static IEnumerable<ITester_AddItem> AddOneElement3() {
+            yield return new Tester_AddItem<string>() {
+                Items = new string[] { },
+                Data = "Piotr",
+                ObjectToCheck = "Aneta"
+            };
+            yield return new Tester_AddItem<int>() {
+                Items = new int[] { 0, 44, 21, 3, 4 },
+                Data = 10,
+                ObjectToCheck = 44
+            };
+            yield return new Tester_AddItem<bool>() {
+                Items = new bool[] { true, false, false },
+                Data = false,
+                ObjectToCheck = true
+            };
+            yield return new Tester_AddItem<float>() {
+                Items = new float[] { 4.44F, .69F, 10F, 999.99F },
+                Data = 100.55F,
+                ObjectToCheck = 4.44F
+            };
+            yield return new Tester_AddItem<Point>() {
+                Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } },
+                Data = new Point { X = -10, Y = 100 },
+                ObjectToCheck = null
             };
         }
 
