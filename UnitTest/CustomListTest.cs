@@ -103,6 +103,30 @@ namespace UnitTest {
         public void Compare_Reverse_IsNotCorrect(ITester_Reverse tester) {
             tester.Compare_Reverse_IsNotCorrect();
         }
+        
+        [Test]
+        [TestCaseSource("IndexOf")]
+        public void Compare_IndexOf_IsCorrect(ITester_IndexOf tester) {
+            tester.Compare_InsertOf_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("IndexOf")]
+        public void Compare_IndexOf_IsNotCorrect(ITester_IndexOf tester) {
+            tester.Compare_InsertOf_IsNotCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("Contains")]
+        public void Compare_Contains_IsCorrect(ITester_Contains tester) {
+            tester.Compare_Contains_IsCorrect();
+        }
+
+        [Test]
+        [TestCaseSource("Contains2")]
+        public void Compare_Contains_IsNotCorrect(ITester_Contains tester) {
+            tester.Compare_Contains_IsNotCorrect();
+        }
 
         public static IEnumerable<ITester_AddItem> AddOneElement() {
             yield return new Tester_AddItem<string>() {
@@ -386,6 +410,90 @@ namespace UnitTest {
             yield return new Tester_Reverse<Point>() {
                 Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } },
                 ExpectionResult = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } }
+            };
+        }
+
+        public static IEnumerable<ITester_IndexOf> IndexOf() {
+            yield return new Tester_IndexOf<string>() {
+                Items = new string[] { "Piotr" },
+                Item = null,
+                ExpectionResult = -1
+            };
+            yield return new Tester_IndexOf<int>() {
+                Items = new int[] { 0, 44, 21, 3, 4 },
+                Item = 4,
+                ExpectionResult = 4
+            };
+            yield return new Tester_IndexOf<bool?>() {
+                Items = new bool?[] { true, false, false },
+                Item = false,
+                ExpectionResult = 1
+            };
+            yield return new Tester_IndexOf<float?>() {
+                Items = new float?[] { 4.44F, .69F, 10F, 999.99F },
+                Item = 666F,
+                ExpectionResult = -1
+            };
+            yield return new Tester_IndexOf<Point>() {
+                Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 } },
+                Item = new Point { X = 0, Y = 0 },
+                ExpectionResult = 0
+            };
+        }
+
+        public static IEnumerable<ITester_Contains> Contains() {
+            yield return new Tester_Contains<string>() {
+                Items = new string[] { "Piotr", "Rozalia", "Michał" },
+                Item = "Rozalia",
+                ExpectionResult = true
+            };
+            yield return new Tester_Contains<int?>() {
+                Items = new int?[] { 0, 44, 21, null, 4 },
+                Item = null,
+                ExpectionResult = true
+            };
+            yield return new Tester_Contains<bool?>() {
+                Items = new bool?[] { true, true, true },
+                Item = false,
+                ExpectionResult = false
+            };
+            yield return new Tester_Contains<float?>() {
+                Items = new float?[] { 4.44F, .69F, 10F, 999.99F },
+                Item = 0F,
+                ExpectionResult = false
+            };
+            yield return new Tester_Contains<Point>() {
+                Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 }, null },
+                Item = new Point { X = -1, Y = 1 },
+                ExpectionResult = true
+            };
+        }
+
+        public static IEnumerable<ITester_Contains> Contains2() {
+            yield return new Tester_Contains<string>() {
+                Items = new string[] { "Piotr", "Rozalia", "Michał" },
+                Item = null,
+                ExpectionResult = true
+            };
+            yield return new Tester_Contains<int?>() {
+                Items = new int?[] { 0, 44, 21, null, 4 },
+                Item = null,
+                ExpectionResult = false
+            };
+            yield return new Tester_Contains<bool?>() {
+                Items = new bool?[] { false, false, false },
+                Item = true,
+                ExpectionResult = true
+            };
+            yield return new Tester_Contains<float?>() {
+                Items = new float?[] { 4.44F, .69F, 10F, 999.99F },
+                Item = 999.99F,
+                ExpectionResult = false
+            };
+            yield return new Tester_Contains<Point>() {
+                Items = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = -1, Y = 1 }, new Point { X = 2, Y = 5 }, null, new Point() },
+                Item = null,
+                ExpectionResult = false
             };
         }
     }

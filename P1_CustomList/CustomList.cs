@@ -157,8 +157,10 @@ namespace P1_CustomList{
             }
         }
 
-        public bool Contains(T item) {
+        public bool Contains(T? item) {
             foreach (T i in _items) {
+                if (i == null && item == null)
+                    return true;
                 if (i.Equals(item))
                     return true;
             }

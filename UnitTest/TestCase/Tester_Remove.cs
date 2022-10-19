@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 namespace UnitTest.TestCase {
     
     public interface ITester_Remove {
-        /*void Compare_Remove_IsCorrect();
-        void Compare_Remove_IsNotCorrect();*/
         void GetCount_Remove_IsCorrect();
         void GetCount_Remove_IsNotCorrect();
         void GetCount_RemoveAt_IsCorrect();
@@ -29,14 +27,6 @@ namespace UnitTest.TestCase {
         public Tester_Remove() {
             _customList = new CustomList<T>();
         }
-
-        /*public void Compare_Remove_IsCorrect() {
-            throw new NotImplementedException();
-        }
-
-        public void Compare_Remove_IsNotCorrect() {
-            throw new NotImplementedException();
-        }*/
 
         public void GetCount_Remove_IsCorrect() {
             _customList.RemoveElement(Data);
