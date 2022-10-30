@@ -27,58 +27,6 @@ namespace P1_CustomList{
             _items = new T[] { };
         }
 
-        public static bool operator ==(CustomList<T> t1, CustomList<T> t2) {
-            if (t1.Count == t2.Count) {
-                for (int i = 0; i < t1.Count; i++) {
-                    if (t1[i].Equals(t2[i]))
-                        continue;
-                    else
-                        return false;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        public static bool operator !=(CustomList<T> t1, CustomList<T> t2) {
-            if (t1.Count != t2.Count) {
-                for (int i = 0; i < t1.Count; i++) {
-                    if (t1[i].Equals(t2[i]))
-                        continue;
-                    else
-                        return false;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        public static bool operator ==(CustomList<T> t1, T[] t2) {
-            if (t1.Count == t2.Length) {
-                for (int i = 0; i < t1.Count; i++) {
-                    if (t1[i].Equals(t2[i]))
-                        continue;
-                    else
-                        return false;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        public static bool operator !=(CustomList<T> t1, T[] t2) {
-            if (t1.Count != t2.Length) {
-                for (int i = 0; i < t1.Count; i++) {
-                    if (t1[i].Equals(t2[i]))
-                        continue;
-                    else
-                        return false;
-                }
-                return true;
-            }
-            return false;
-        }
-
         public void Add(T? item) {
             resizeArray(item);
         }
@@ -184,6 +132,57 @@ namespace P1_CustomList{
 
             result[_items.Length] = item;
             _items = result;
+        }
+
+        public static bool operator ==(CustomList<T> t1, CustomList<T> t2) {
+            if (t1.Count == t2.Count) {
+                for (int i = 0; i < t1.Count; i++) {
+                    if (t1[i].Equals(t2[i]))
+                        continue;
+                    else
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public static bool operator !=(CustomList<T> t1, CustomList<T> t2) {
+            if (t1.Count != t2.Count) {
+                for (int i = 0; i < t1.Count; i++) {
+                    if (t1[i].Equals(t2[i]))
+                        continue;
+                    else
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public static bool operator ==(CustomList<T> t1, T[] t2) {
+            if (t1.Count == t2.Length) {
+                for (int i = 0; i < t1.Count; i++) {
+                    if (t1[i].Equals(t2[i]))
+                        continue;
+                    else
+                        return false;
+                }
+                return true;
+            }
+            return false;
+        }
+        public static bool operator !=(CustomList<T> t1, T[] t2) {
+            if (t1.Count != t2.Length) {
+                for (int i = 0; i < t1.Count; i++) {
+                    if (t1[i].Equals(t2[i]))
+                        continue;
+                    else
+                        return false;
+                }
+                return true;
+            }
+            return false;
         }
     }
 }
