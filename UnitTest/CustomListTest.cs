@@ -7,9 +7,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnitTest.TestCase;
 
+// https://docs.nunit.org/articles/nunit/writing-tests/attributes/testcase.html
+// https://docs.nunit.org/articles/nunit/writing-tests/attributes/testcasesource.html
+
 namespace UnitTest {
-    // https://docs.nunit.org/articles/nunit/writing-tests/attributes/testcase.html
-    // https://docs.nunit.org/articles/nunit/writing-tests/attributes/testcasesource.html
 
     [TestFixture]
     public class CustomListTest {
